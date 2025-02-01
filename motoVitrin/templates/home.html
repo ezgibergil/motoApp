@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-indigo-700 text-white p-5 hidden md:block">
+            <h2 class="text-2xl font-bold mb-6">Hoşgeldiniz, {{user.username}}</h2>
+            <ul>
+                <li class="mb-4"><a href="#" class="block py-2 px-4 rounded hover:bg-indigo-500">Ana Sayfa</a></li>
+                <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
+                <li class="mb-4"><a href="#" class="block py-2 px-4 rounded hover:bg-indigo-500">Ayarlar</a></li>
+                <li class="mb-4"><a href="{%url 'logout' %}" class="block py-2 px-4 rounded bg-red-600 hover:bg-red-500">Çıkış Yap</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <div class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold">Hoşgeldiniz, {{ user.username }}</h1>
+                <div>
+                    <button class="bg-gray-200 px-4 py-2 rounded">Bildirimler</button>
+                </div>
+            </div>
+            
+            <!-- Dashboard Cards -->
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="text-xl font-bold">Toplam Kullanıcı</h2>
+                    <p class="text-3xl mt-2">1,234</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="text-xl font-bold">Satışlar</h2>
+                    <p class="text-3xl mt-2">$12,345</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="text-xl font-bold">Ziyaretçiler</h2>
+                    <p class="text-3xl mt-2">5,678</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="text-xl font-bold">Siparişler</h2>
+                    <p class="text-3xl mt-2">456</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
