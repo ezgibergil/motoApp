@@ -18,12 +18,26 @@ from django.urls import path
 from motoVitrin import views
 
 
+ 
+
+
+
+
 urlpatterns = [
     path('admin/',admin.site.urls,name='admin'),
-    path('login/',views.user_login,name='login'),
+    path('login/',views.custom_login,name='login'),
     path('home/',views.home,name='home'),
     path('register/',views.register,name='register'),
     path('logout/', views.logout_user,name='logout'),
     path('users/', views.user_list, name='user_list'),
+    path('categories/', views.category_list, name='category_list'),
+    path('categories/delete/<int:category_id>/', views.delete_category, name='delete_category'),
+    path("sales-report/", views.sales_report, name="sales_report"),
+    path("siparis_ekle/",views.siparis_ekle, name="siparis_ekle"),
+    path('custom-login/',views.custom_login, name='customlogin'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('marketer-dashboard/', views.marketer_dashboard, name='marketer_dashboard'),
+    path('user-dashboard/', views.user_dashboard, name='user_dashboard'),
+    
 ]
 

@@ -58,7 +58,9 @@ ROOT_URLCONF = 'motoAlSat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'motoVitrin/templates',  # Bu satır, şablonlarınızın bulunduğu dizini belirtir
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +72,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'motoAlSat.wsgi.application'
 

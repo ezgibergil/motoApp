@@ -15,7 +15,10 @@
             <ul>
                 <li class="mb-4"><a href="#" class="block py-2 px-4 rounded hover:bg-indigo-500">Ana Sayfa</a></li>
                 <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
-                <li class="mb-4"><a href="#" class="block py-2 px-4 rounded hover:bg-indigo-500">Ayarlar</a></li>
+                <li class="mb-4"><a href="{%url 'category_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kategoriler</a></li>
+                <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
+                <li class="mb-4"><a href="{%url 'siparis_ekle' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Sipariş Ekle</a></li>
+                <li class="mb-4"><a href="{%url 'sales_report' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Satışlar</a></li>
                 <li class="mb-4"><a href="{%url 'logout' %}" class="block py-2 px-4 rounded bg-red-600 hover:bg-red-500">Çıkış Yap</a></li>
             </ul>
         </div>
@@ -27,26 +30,6 @@
                 <h1 class="text-xl font-semibold">Hoşgeldiniz, {{ user.username }}</h1>
                 <div>
                     <button class="bg-gray-200 px-4 py-2 rounded">Bildirimler</button>
-                </div>
-            </div>
-            
-            <!-- Dashboard Cards -->
-            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h2 class="text-xl font-bold">Toplam Kullanıcı</h2>
-                    <p class="text-3xl mt-2">1,234</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h2 class="text-xl font-bold">Satışlar</h2>
-                    <p class="text-3xl mt-2">$12,345</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h2 class="text-xl font-bold">Ziyaretçiler</h2>
-                    <p class="text-3xl mt-2">5,678</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h2 class="text-xl font-bold">Siparişler</h2>
-                    <p class="text-3xl mt-2">456</p>
                 </div>
             </div>
         </div>

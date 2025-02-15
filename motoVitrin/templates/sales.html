@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satış Raporu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-indigo-700 text-white p-5 hidden md:block">
+            <h2 class="text-2xl font-bold mb-6">Hoşgeldiniz, {{user.username}}</h2>
+            <ul>
+                <li class="mb-4"><a href="{%url 'home' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Ana Sayfa</a></li>
+                <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
+                <li class="mb-4"><a href="{%url 'category_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kategoriler</a></li>
+                <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
+                <li class="mb-4"><a href="{%url 'siparis_ekle' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Sipariş Ekle</a></li>
+                <li class="mb-4"><a href="{%url 'sales_report' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Satışlar</a></li>
+                <li class="mb-4"><a href="{%url 'logout' %}" class="block py-2 px-4 rounded bg-red-600 hover:bg-red-500">Çıkış Yap</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <div class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold">Hoşgeldiniz, {{ user.username }}</h1>
+                <div>
+                    <button class="bg-gray-200 px-4 py-2 rounded">Bildirimler</button>
+                </div>
+            </div>
+
+
+    <div class="max-w-auto mx-auto bg-white p-6 rounded-lg shadow-lg mt-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">📊 Satış Raporu</h2>
+
+        <!-- Hata Mesajları -->
+        {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="bg-red-500 text-white p-2 rounded-md">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Tarih Seçme Formu -->
+        <form method="GET" action="{% url 'sales_report' %}" class="mb-6">
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Ay Seçimi -->
+                <div>
+                    <h3 class="font-semibold mb-2">📅 Ay Seç</h3>
+                    <select name="month" class="form-select w-full py-2 px-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Ay Seçiniz</option>
+                        {% for month in months %}
+                            <option value="{{ month.value }}" {% if month.value == selected_month %}selected{% endif %}>{{ month.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Yıl Seçimi -->
+                <div>
+                    <h3 class="font-semibold mb-2">📆 Yıl Seç</h3>
+                    <select name="year" class="form-select w-full py-2 px-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Yıl Seçiniz</option>
+                        {% for year in years %}
+                            <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow">
+                Raporu Getir
+            </button>
+        </form>
+
+        <!-- Rapor Sonuçları -->
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold text-gray-700">📈 Rapor Sonuçları</h3>
+            <p>Toplam Satış: <strong>{{ total_sales }} ₺</strong></p>
+            <p>KDV (%20): <strong>{{ vat_amount }} ₺</strong></p>
+        </div>
+
+        <!-- Kategori Satışları -->
+        <div class="mt-4">
+            <h3 class="text-lg font-semibold text-gray-700">📌 Kategori Bazlı Satışlar</h3>
+            <ul class="list-disc pl-6">
+                {% for category in category_sales %}
+                    <li>{{ category.category__name }}: <strong>{{ category.sales_count }} satış</strong> - <strong>{{ category.total_sales }} ₺</strong></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

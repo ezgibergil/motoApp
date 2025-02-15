@@ -1,0 +1,103 @@
+<!-- templates/category_list.html -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategoriler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-indigo-700 text-white p-5 hidden md:block">
+            <h2 class="text-2xl font-bold mb-6">Hoşgeldiniz, {{user.username}}</h2>
+            <ul>
+                <li class="mb-4"><a href="#" class="block py-2 px-4 rounded hover:bg-indigo-500">Ana Sayfa</a></li>
+                <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
+                <li class="mb-4"><a href="{%url 'category_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kategoriler</a></li>
+                <li class="mb-4"><a href="{%url 'user_list' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Kullanıcılar</a></li>
+                <li class="mb-4"><a href="{%url 'siparis_ekle' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Sipariş Ekle</a></li>
+                <li class="mb-4"><a href="{%url 'sales_report' %}" class="block py-2 px-4 rounded hover:bg-indigo-500">Satışlar</a></li>
+                <li class="mb-4"><a href="{%url 'logout' %}" class="block py-2 px-4 rounded bg-red-600 hover:bg-red-500">Çıkış Yap</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <div class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold">Hoşgeldiniz, {{ user.username }}</h1>
+                <div>
+                    <button class="bg-gray-200 px-4 py-2 rounded">Bildirimler</button>
+                </div>
+            </div>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Kategoriler</h1>
+
+        <!-- Hata ve Başarı Mesajları -->
+        {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                    <div class="p-3 rounded {% if message.tags == 'success' %}bg-green-500 text-white{% else %}bg-red-500 text-white{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Kategori Listesi -->
+        <div class="flex items-center justify-center">
+            <div class="bg-white shadow-lg p-8 rounded-lg w-full max-w-md">
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            
+                            <th class="border border-gray-300 px-4 py-2">Kategori Adı</th>
+                            <th class="border border-gray-300 px-4 py-2">İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr class="hover:bg-gray-100 transition">
+                            
+                            <td class="border border-gray-300 px-4 py-2 text-center">{{ category.name }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-center">
+                                <form method="POST" action="{% url 'delete_category' category.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="bg-red-500 text-white px-2 py-1 text-sm rounded-md hover:bg-red-600 transition">
+                                        Sil
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="border border-gray-300 px-4 py-2 text-center text-red-500">Henüz kategori eklenmemiş.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Yeni Kategori Ekleme Formu -->
+        <div class="flex items-center justify-center mt-8">
+            <div class="bg-white shadow-lg p-8 rounded-lg w-full max-w-md">
+                <h2 class="text-2xl font-bold text-center mb-6">Yeni Kategori Ekle</h2>
+                <form method="POST" action="{% url 'category_list' %}" class="flex flex-col space-y-4">
+                    {% csrf_token %}
+                    <input type="text" name="category_name" placeholder="Kategori Adı" 
+                        class="p-3 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" 
+                        class="bg-blue-500 text-white px-3 py-1 text-lg rounded-lg hover:bg-blue-600 transition w-auto self-center">
+                        Ekle
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
